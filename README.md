@@ -2,7 +2,7 @@
 <img src="https://github.com/shakedkialy/Coderage/blob/main/html_files/logo.png?raw=true" width="250"> 
 Coderage is a package that allows running tests and code coverage in comparison over time.
 The purpose of this project is to enable easy and efficient analyzing and conclusion drawing regarding software testing.
-
+ mni
 
 requirements for running: \
     packages: pytest, pytest-cov, pytest-html (via pip install)\
