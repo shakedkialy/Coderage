@@ -17,4 +17,8 @@ requirements for running: \
     
       python main.py module=. tests=Tests_Examples
     
+    suggestions to improve the explanasion of the project:
+        1. the installation explanasion is very clear so no suggestions.
+        2. I think that maybe a bit more explanation on what the code coverage means is necessary.
+    
      
