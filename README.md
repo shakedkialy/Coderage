@@ -8,7 +8,8 @@ requirements for running: \
     packages: pytest, pytest-cov, pytest-html (via pip install)\
     1. add __ init__.py file to the code package you want to test. \
     2. name your test files *test.py \
-    3. command line for example: \
+    
+    command line for example: 
     
       python main.py module=module1,module2 tests=test1,test2 out_dir=results \
     
