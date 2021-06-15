@@ -40,3 +40,6 @@ After this command line script is complete, you should see the following message
   * ```Results\annotate```
  
  * To view the results of this package open main_index.html (located in <full_path_to_Coderage_project>/Results/html/main_index.html) via any web browser and navigate from there to all the reports.
+
+## Authors
+[Shaked Kialy](https://github.com/shakedkialy) [Doron Lavi](https://github.com/doronlavi) [Nitzan Drori](https://github.com/nitzand95)
