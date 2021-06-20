@@ -1,5 +1,5 @@
-from HTML_TEMPLATES import *
-from JS_TEMPLATES import *
+from Main.HTML.HTML_TEMPLATES import *
+from Main.HTML.JS_TEMPLATES import *
 import os
 import shutil
 
