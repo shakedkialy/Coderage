@@ -1,80 +1,81 @@
-import sys
 from os import path
 from Main.DB.DatabaseHandler import *
 from Main.HTML.HTML import *
 from Main.Parser.Parser import *
+import argparse
 
 
-def parse_args(argv):
+def parse_args():
     """
     this function parses the command line arguments
-    :param argv: array of command line arguments
-    :return: arguments neccassry to run the program
+    :return: arguments necessary to run the program
     """
-    code_path, test_path, output_path, extra_args, delete_out = "", "Tests", "Results", "", True
-    for arg in argv[1:]:
-        if "module" in arg:
-            modules = arg.split("=")[1]
-            code_path = modules.split(",")
-        elif "tests" in arg:
-            test_path = arg.split("=")[1]
-        elif "out_dir" in arg:
-            output_path = arg.split("=")[1]
-        elif "delete_out" in arg:
-            delete_out = arg.split("=")[1]
-            if delete_out == "False":
-                delete_out = False
-        else:
-            extra_args += " " + arg
-    if code_path == "":
-        raise Exception("Missing modules to cover")
-    return code_path, test_path, output_path, delete_out, extra_args
+    arg_parser = argparse.ArgumentParser(description="Usage: Coderage -m <Modules to test> -t <Test directory>")
+    arg_parser.add_argument('-m', '--module', help='Path to your tested modules', nargs='+', metavar='')
+    arg_parser.add_argument('-t', '--tests', help='Path to your tests directory', nargs='+', metavar='')
+    arg_parser.add_argument('-o', '--out_dir', help='Path to your output directory', default='results', metavar='')
+    arg_parser.add_argument('-d', '--delete_out', help='True/False, delete unnecessary pytest files from out dir',
+                            default=True, metavar='')
+    arg_parser.add_argument('-e', '--extra_args', help='Extra args to pass pytest (call without --)', nargs='*',
+                            default='', metavar='')
+    return arg_parser.parse_args()
 
 
 def main():
-    code_path, test_path, output_path, delete_out, extra_args = parse_args(sys.argv)
-
-    if not os.path.exists(output_path):
-        if not delete_out:
-            os.system("mkdir %(output_path)s" % {"output_path": output_path})
+    args = parse_args()
+    if not os.path.exists(args.out_dir):
+        if not args.delete_out:
+            os.system("mkdir %(out_dir)s" % {"out_dir": args.out_dir})
         else:
-            os.system("mkdir %(output_path)s %(annotate_path)s" % {"output_path": output_path,
-                                                                 "annotate_path": path.join(output_path, "annotate")})
-    elif os.path.exists(path.join(output_path, "html")):
-        shutil.rmtree(path.join(output_path, "html"))
+            os.system("mkdir %(out_dir)s %(annotate_path)s" % {"out_dir": args.out_dir,
+                                                               "annotate_path": path.join(args.out_dir, "annotate")})
+    elif os.path.exists(path.join(args.out_dir, "html")):
+        shutil.rmtree(path.join(args.out_dir, "html"))
 
-    db = DatabaseHandler(output_path, code_path, test_path)
+    db = DatabaseHandler(args.out_dir, args.module, args.tests)
 
+    # Convert list of modules directories to cov_modules string
     cov_modules = ""
-    for module in code_path:
+    for module in args.module:
         cov_modules += ("--cov=%(code_path)s " % {"code_path": module})
 
-    if not delete_out and os.path.exists(output_path):
-        output_path += str(db.get_last_run_id() + 1)
+    # Adding -- before each extra argument
+    extra_args = ""
+    for extra_arg in args.extra_args:
+        extra_args += ("--%(extra_arg)s " % {"extra_arg": extra_arg})
 
-    exit_code = os.system(
-        "python -m pytest --cov-report annotate:%(cov_annotate)s --cov-report html:%(cov_html)s --cov-report xml:%(Covxml)s %(cov_modules)s"
-        " %(test_path)s --junitxml=%(Testsxml)s --html=%(pytest_report)s %(extra_args)s" % {
-            "cov_modules": cov_modules,
-            "test_path": test_path,
-            "Covxml": path.join(output_path, "coverage.xml"),
-            "Testsxml": path.join(output_path, "tests.xml"),
-            "cov_annotate": path.join(output_path, "annotate"),
-            "cov_html": path.join(output_path, "html"),
-            "pytest_report": path.join(output_path, "html", "pytest_report.html"),
-            "extra_args": extra_args})
+    # Convert list of tests directories to tests string
+    tests = ""
+    for test_dir in args.tests:
+        tests += ("%(test_dir)s " % {"test_dir": test_dir})
 
+    if not args.delete_out and os.path.exists(args.out_dir):
+        args.out_dir += str(db.get_last_run_id() + 1)
+    pytest_cmd = "python -m pytest --cov-report annotate:%(cov_annotate)s --cov-report html:%(cov_html)s " \
+                 "--cov-report xml:%(Covxml)s %(cov_modules)s %(test_path)s --junitxml=%(Testsxml)s " \
+                 "--html=%(pytest_report)s %(extra_args)s" % \
+                 {
+                     "cov_modules": cov_modules,
+                     "test_path": tests,
+                     "Covxml": path.join(args.out_dir, "coverage.xml"),
+                     "Testsxml": path.join(args.out_dir, "tests.xml"),
+                     "cov_annotate": path.join(args.out_dir, "annotate"),
+                     "cov_html": path.join(args.out_dir, "html"),
+                     "pytest_report": path.join(args.out_dir, "html", "pytest_report.html"),
+                     "extra_args": extra_args
+                 }
+
+    exit_code = os.system(pytest_cmd)
     if exit_code != 0 and exit_code != 1:
         exit()
 
-    parser = Parser(db, output_path)
-    html = HTML(path.join(output_path, "html"), db)
+    parser = Parser(db, args.out_dir)
 
-    if delete_out:
+    if args.delete_out:
         os.system("rm -r -f %(Covxml)s %(Testsxml)s %(cov_annotate)s .pytest_cache" % {
-            "Covxml": path.join(output_path, "coverage.xml"),
-            "Testsxml": path.join(output_path, "tests.xml"),
-            "cov_annotate": path.join(output_path, "annotate")
+            "Covxml": path.join(args.out_dir, "coverage.xml"),
+            "Testsxml": path.join(args.out_dir, "tests.xml"),
+            "cov_annotate": path.join(args.out_dir, "annotate")
         })
 
 

@@ -16,7 +16,7 @@ The purpose of this project is to enable easy and efficient analyzing and conclu
 * If you clone our files in git, the folder DemoProject contains examples files for running (module1, module2 folders contain 2 code modules for example. Tests contains pytest tests for these modules). \
 enter code_examples directory ```cd DemoProject```
 and run this command: \
-```Coderage module=. tests=Tests```
+```Coderage -m . -t Tests```
 \
 This command runs coverage on the whole directory and runs the tests in the Tests_Examples folder.
 
@@ -32,7 +32,25 @@ After this command line script is complete, you should see the following message
 1. Name your test files _test_filename_ or _filename_test_ (for pytest to recognize them as test files)
 
 * In order to run Coderage you can use the following command: \
-`Coderage module=<modules> tests=<tests>`
+`Coderage -m <modules> -t <tests>`  
+`Coderage -h` will display this:
+  ```
+  usage: Coderage [-h] [-m  [...]] [-t  [...]] [-o] [-d] [-e [[...]]]
+  
+  Usage: Coderage -m <Modules to test> -t <Test directory>
+  
+  optional arguments:
+    -h, --help            show this help message and exit
+    -m  [ ...], --module  [ ...]
+                          Path to your tested modules
+    -t  [ ...], --tests  [ ...]
+                          Path to your tests directory
+    -o , --out_dir        Path to your output directory
+    -d , --delete_out     True/False, delete unnecessary pytest files from out
+                          dir
+    -e [ [ ...]], --extra_args [ [ ...]]
+                          Extra args to pass pytest (call without --)
+  ```
 
 ## Results
 * The Coderage results located under ```Results``` folder in your project directory. Results folder created after at least one run.
