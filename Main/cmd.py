@@ -82,5 +82,6 @@ def main():
     print("To watch the results copy this path to your internet browser: \n" +
           os.path.abspath(abs_path))
 
+
 if __name__ == '__main__':
     main()
