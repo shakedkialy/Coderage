@@ -1,8 +1,8 @@
 import sys
 from os import path
 from Main.DB.DatabaseHandler import *
-from Main.Parser.Parser import *
 from Main.HTML.HTML import *
+from Main.Parser.Parser import Parser
 
 
 def parse_args(argv):
