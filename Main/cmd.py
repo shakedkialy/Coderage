@@ -1,8 +1,9 @@
 import sys
-from DatabaseHandler import *
-from Parser import *
-from HTML import *
 from os import path
+from Main.DB.DatabaseHandler import *
+from Main.HTML.HTML import *
+from Main.Parser.Parser import *
+
 
 def parse_args(argv):
     """
@@ -30,7 +31,7 @@ def parse_args(argv):
     return code_path, test_path, output_path, delete_out, extra_args
 
 
-if __name__ == "__main__":
+def main():
     code_path, test_path, output_path, delete_out, extra_args = parse_args(sys.argv)
 
     if not os.path.exists(output_path):
@@ -76,4 +77,6 @@ if __name__ == "__main__":
             "cov_annotate": path.join(output_path, "annotate")
         })
 
-    # python main.py module=. tests=Tests_Examples
+
+if __name__ == '__main__':
+    main()
