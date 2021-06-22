@@ -9,15 +9,17 @@ The purpose of this project is to enable easy and efficient analyzing and conclu
 
 ## Requirements for Installing:  
 - `git clone https://github.com/shakedkialy/Coderage.git`
-- packages : 
-  - `pip install pytest` 
-  - `pip install pytest-cov`
-  -  `pip install pytest-html`
+- `pip install -e <path to package>`
+- Wait for the package to be successfully installed - "Successfully installed Coderage"
 
 ## Test Your Installment:
-* If you clone our files in git, code and code2 folders contain 2 code modules for example. Tests_Examples contains pytest test for those modules. \
-This command runs coverage on the whole directory (ignores the package files and runs coverage on code and code2) and runs the test in the Tests_Examples folder:
-```python main.py module=. tests=Tests_Examples```
+* If you clone our files in git, the folder DemoProject contains examples files for running (module1, module2 folders contain 2 code modules for example. Tests contains pytest tests for these modules). \
+enter code_examples directory ```cd DemoProject```
+and run this command: \
+```Coderage module=. tests=Tests```
+\
+This command runs coverage on the whole directory and runs the tests in the Tests_Examples folder.
+
 
 After this command line script is complete, you should see the following message:
 
@@ -27,16 +29,18 @@ After this command line script is complete, you should see the following message
 
 ## Usage Instructions
   
-1. Add ```__ init__.py``` file to the code package you want to test. 
-2. Name your test files ```*test.py``` 
+1. Name your test files _test_filename_ or _filename_test_ (for pytest to recognize them as test files)
 
-* In order to run Coderage you can use the following command:
-`python main.py module=module1,module2 tests=test1,test2 out_dir=results`
+* In order to run Coderage you can use the following command: \
+`Coderage module=<modules> tests=<tests>`
 
 ## Results
 * The Coderage results located under ```Results``` folder in your project directory. Results folder created after at least one run.
-  * ```Results\html``` contains HTML files where you can find graphs and analysis of your last run. \
+  * ```Results\html``` contains HTML files where you can find graphs and analysis of your last run. 
   * ```Results\coverage```
   * ```Results\annotate```
+  \
+  Notice that the package automatically deletes the result files that aren't necessary for the html report.
+  If you wish to keep all the files, add the parameter _delete_out=False_ to the command line. 
  
- * To view the results of this package open main_index.html (located in <full_path_to_Coderage_project>/Results/html/main_index.html) via any web browser and navigate from there to all the reports.
+ * To view the results of this package open main_index.html (located in <Your code>/Results/html/main_index.html) via any web browser and navigate from there to all the reports.

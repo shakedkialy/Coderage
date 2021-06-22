@@ -1,8 +1,9 @@
 import sys
-from DatabaseHandler import *
-from Parser import *
-from HTML import *
 from os import path
+from Main.DB.DatabaseHandler import *
+from Main.HTML.HTML import *
+from Main.Parser.Parser import *
+
 
 def parse_args(argv):
     """
@@ -30,7 +31,7 @@ def parse_args(argv):
     return code_path, test_path, output_path, delete_out, extra_args
 
 
-if __name__ == "__main__":
+def main():
     code_path, test_path, output_path, delete_out, extra_args = parse_args(sys.argv)
 
     if not os.path.exists(output_path):
@@ -79,3 +80,7 @@ if __name__ == "__main__":
     print("To watch the results copy this path to your internet browser: \n" +
           os.path.abspath(abs_path))
     # python main.py module=. tests=Tests_Examples
+
+
+if __name__ == '__main__':
+    main()
