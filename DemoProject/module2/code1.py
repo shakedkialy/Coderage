@@ -1,13 +1,7 @@
-def func1(x):
-    return x + 1
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-
-def func2(arr, i):
-    return arr[i]
-
-
-def func3(isTrue):
-    if isTrue:
-        return "True!"
-    else:
-        return "False!"
+    def get_name(self):
+        return self.name

@@ -13,10 +13,10 @@ The purpose of this project is to enable easy and efficient analyzing and conclu
 - Wait for the package to be successfully installed - "Successfully installed Coderage"
 
 ## Test Your Installment:
-* If you clone our files in git, the folder code_examples contains examples files for running (code1, code2 folders contain 2 code modules for example. Tests_Examples contains pytest tests for these modules). \
-enter code_examples directory ```cd code_examples```
+* If you clone our files in git, the folder DemoProject contains examples files for running (module1, module2 folders contain 2 code modules for example. Tests contains pytest tests for these modules). \
+enter code_examples directory ```cd DemoProject```
 and run this command: \
-```Coderage module=. tests=TestsExamples```
+```Coderage module=. tests=Tests```
 \
 This command runs coverage on the whole directory and runs the tests in the Tests_Examples folder.
 
@@ -32,7 +32,7 @@ After this command line script is complete, you should see the following message
 1. Name your test files _test_filename_ or _filename_test_ (for pytest to recognize them as test files)
 
 * In order to run Coderage you can use the following command: \
-`Coderage module=. tests=TestsExamples`
+`Coderage module=<modules> tests=<tests>`
 
 ## Results
 * The Coderage results located under ```Results``` folder in your project directory. Results folder created after at least one run.

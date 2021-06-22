@@ -1,5 +1,4 @@
-from code1.code3 import *
-
+from DemoProject.module1.code3 import *
 
 def test1():
     assert(func1(5) == 6)
