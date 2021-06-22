@@ -1,4 +1,4 @@
-from code2.code2 import *
+from DemoProject.module2.code2 import *
 
 
 def test1():
