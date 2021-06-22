@@ -76,6 +76,10 @@ def main():
             "Testsxml": path.join(output_path, "tests.xml"),
             "cov_annotate": path.join(output_path, "annotate")
         })
+    abs_path = output_path + "/html/main_index.html"
+    print("To watch the results copy this path to your internet browser: \n" +
+          os.path.abspath(abs_path))
+    # python main.py module=. tests=Tests_Examples
 
 
 if __name__ == '__main__':
