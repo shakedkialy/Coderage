@@ -76,3 +76,4 @@ if __name__ == "__main__":
             "cov_annotate": path.join(output_path, "annotate")
         })
 
+    # python main.py module=. tests=Tests_Examples
