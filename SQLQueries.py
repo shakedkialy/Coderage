@@ -73,7 +73,7 @@ INSERT_FUNCTIONS_DETAILS = """INSERT INTO functions_details(run_id,file_name,fun
 ----- Html - Main page ----
 """
 
-MAIN_TABLE = """SELECT rs.run_id, rs.passed, rs.failed, rs.errors, rs.skipped, rs.run_time, cv.line_rate*100, cv.lines_valid
+MAIN_TABLE = """SELECT rs.run_id, rs.passed, rs.failed, rs.errors, rs.skipped, rs.run_time, ROUND(cv.line_rate*100, 2), cv.lines_valid
                 FROM run_summary rs
                 left join coverage_summary cv
                 on rs.run_id = cv.run_id
@@ -85,7 +85,7 @@ MAIN_TESTS_HISTORY = """SELECT rs.run_id, rs.passed, rs.failed, rs.skipped
                             order by run_id desc
                             limit {}"""
 
-MAIN_COVERAGE_HISTORY = """SELECT cs.run_id, cs.line_rate*100 as percent
+MAIN_COVERAGE_HISTORY = """SELECT cs.run_id, ROUND(cv.line_rate*100, 2) as percent
                                 FROM coverage_summary cs 
                                 order by run_id desc
                                 limit {}"""
