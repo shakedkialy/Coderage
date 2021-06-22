@@ -20,6 +20,7 @@ and run this command: \
 \
 This command runs coverage on the whole directory and runs the tests in the Tests_Examples folder.
 
+
 After this command line script is complete, you should see the following message:
 
       Coverage annotated source written to dir Results\annotate
