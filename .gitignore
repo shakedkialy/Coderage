@@ -1,4 +1,5 @@
 __pycache__/*
 results/*
 .coverage
-Tests_Examples/__pycache__/*
+DemoProject/Tests/__pycache__/*
+/.idea/*

@@ -16,8 +16,8 @@ The purpose of this project is to enable easy and efficient analyzing and conclu
 
 ## Test Your Installment:
 * If you clone our files in git, code and code2 folders contain 2 code modules for example. Tests_Examples contains pytest test for those modules. \
-This command runs coverage on the whole directory (ignores the package files and runs coverage on code and code2) and runs the test in the Tests_Examples folder:
-```python main.py module=. tests=Tests_Examples```
+This command runs coverage on the whole directory (ignores the package files and runs coverage on code and code2) and runs the test in the Tests_Examples folder:  
+```python main.py module=./DemoProject tests=./DemoProject/Tests_Examples```
 
 After this command line script is complete, you should see the following message:
 
