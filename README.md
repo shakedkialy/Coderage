@@ -9,7 +9,7 @@ The purpose of this project is to enable easy and efficient analyzing and conclu
 
 ## Requirements for Installing:  
 - `git clone https://github.com/shakedkialy/Coderage.git`
-- `python -m pip install <path to package>`
+- `pip install -e <path to package>`
 - Wait for the package to be successfully installed - "Successfully installed Coderage"
 
 ## Test Your Installment:
