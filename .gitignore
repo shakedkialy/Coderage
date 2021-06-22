@@ -1,4 +1,6 @@
 __pycache__/*
-results/*
+*/results/*
 .coverage
 Tests_Examples/__pycache__/*
+/.idea
+/Coderage.egg-info/
