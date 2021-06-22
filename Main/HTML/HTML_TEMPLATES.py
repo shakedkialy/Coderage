@@ -7,7 +7,6 @@ MAIN_HTML_MSG = """<!DOCTYPE html>
             <link rel="stylesheet" href="main_style.css" type="text/css">
             <link rel="stylesheet" href="highchart.css" type="text/css">
 
-
         </head>
         <body class="indexfile">
         <div id="header">
@@ -53,25 +52,69 @@ MAIN_HTML_MSG = """<!DOCTYPE html>
         </div>
         <br></br>
         <br></br>
-        <div id="footer">
-            <div class="content">
-                <span>
-                    <a class="nav" href="detailedLastRun.html">Detailed Last Ran Analysis</a> 
-                </span>
-                <span>
-                    <a class="nav" href="pytest_report.html">Detailed Tests Results</a> 
-                </span>
-                <span>
-                    <a class="nav" href="index.html">Detailed Coverage</a> 
-                </span>
-                <span>
-                    <a class="nav" href="coverageAnalysis.html">Coverage Analysis By File</a> 
-                </span>
+        
+        <table style="width:100%">
+              <tr>
+                <td> 
+                 <div id="footer">
+                    <div class="content">
                         <span>
-                    <a class="nav" href="testAnalysis.html">Test Analysis By File</a> 
-                </span>
-            </div>
-        </div>
+                            <a class="nav" href="detailedLastRun.html">Detailed Last Ran Analysis</a> 
+                        </span>
+                    </div>
+                 </div>
+                </td>
+                <td> 
+                 <div id="footer">
+                    <div class="content">
+                        <span>
+                            <a class="nav" href="pytest_report.html">Detailed Tests Results</a> 
+                        </span>
+                    </div>
+                 </div>
+                </td>
+                <td> 
+                 <div id="footer">
+                    <div class="content">
+                        <span>
+                            <a class="nav" href="index.html">Detailed Coverage</a> 
+                        </span>
+                    </div>
+                 </div>
+                </td> 
+                <td> 
+                 <div id="footer">
+                    <div class="content">
+                        <span>
+                            <a class="nav" href="coverageAnalysis.html">Coverage Analysis By File</a> 
+                        </span>
+                    </div>
+                 </div>
+                </td> 
+                <td> 
+                 <div id="footer">
+                    <div class="content">
+                        <span>
+                            <a class="nav" href="testAnalysis.html">Test Analysis By File</a> 
+                        </span>
+                    </div>
+                 </div>
+                </td>                                                
+              </tr>
+          
+          <tr>
+            <td style="font-size: 13px;">
+                Details about last run - tests & function stats</td>
+            <td style="font-size: 13px;">
+                HTML test report which python generates</td>
+            <td style="font-size: 13px;">
+                HTML coverage report which coverage generates</td>
+            <td style="font-size: 13px;">
+                Coverage percentage by file</td>
+            <td style="font-size: 13px;">
+                Test statuses and percentage by file</td>
+          </tr>
+        </table>
         <br></br>
 
         <script src="https://code.highcharts.com/highcharts.js"></script>

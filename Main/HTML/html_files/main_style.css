@@ -20,7 +20,7 @@ p { font-size: .875em; line-height: 1.4em; }
 
 table { border-collapse: collapse; }
 
-td { vertical-align: top; }
+td { vertical-align: top; text-align: center; }
 
 table tr.hidden { display: none !important; }
 
