@@ -101,14 +101,13 @@ class Parser:
             functions = re.split('(\s)+def', file.read())
             for function in functions[1:]:
                 function_name = function.split('\n')[0]
-                try:
+                if "(" in function:
                     function_name = function_name[:function_name.index("(")]
-                except:
-                    continue
-                is_tested = 0
-                if '>' in function:
-                    is_tested = 1
-                function_details_rows.append((self.__runId, file_name, function_name, is_tested))
+                    is_tested = 0
+                    if '>' in function:
+                        is_tested = 1
+                    function_details_rows.append((self.__runId, file_name, function_name, is_tested))
+
 
         self.__db.insert_functions_details(function_details_rows)
 
