@@ -118,7 +118,6 @@ COVERAGE_HTML_ANALYSIS = """"<!DOCTYPE html>
         align-items: center;
         height: 700px;
         max-height: 700px;
-        overflow-y: scroll;
     }}
 
     img {{ width: 20%; height: 20%; margin-left: 40%;}}
@@ -150,6 +149,18 @@ COVERAGE_HTML_ANALYSIS = """"<!DOCTYPE html>
 
     #myTable tr.header, #myTable tr:hover {{
       background-color: #f1f1f1;
+      position: sticky;
+    }}
+    thead,
+    tbody tr {{
+        display: table;
+        width: 100%;
+        }}
+    tbody {{
+        display: block;
+        overflow-y: scroll;
+        overflow-x: none;
+        max-height: 350px;
     }}
     
     h1{{
@@ -179,7 +190,9 @@ COVERAGE_HTML_ANALYSIS = """"<!DOCTYPE html>
         <th>Coverage Percentages</th>
 
       </tr>
-      {}
+      <tbody>
+          {}
+      </tbody>
     </table>
 
     <script>
@@ -314,7 +327,6 @@ TEST_ANALYSIS =  """"<!DOCTYPE html>
         align-items: center;
         height: 300px;
         max-height: 300px;
-        overflow-y: scroll;
     }}
 
     img {{ width: 20%; height: 20%; margin-left: 40%;}}
@@ -330,9 +342,10 @@ TEST_ANALYSIS =  """"<!DOCTYPE html>
 
     #myTable, #myTable2, #myTable3 {{
       border-collapse: collapse;
-      width: 50%;
+      width: 90%;
       border: 1px solid #ddd;
       font-size: 12px;
+      overflow-y: auto;
     }}
 
     #myTable th, #myTable2 th, #myTable3 th, #myTable td, #myTable2 td, #myTable3 td {{
@@ -346,10 +359,40 @@ TEST_ANALYSIS =  """"<!DOCTYPE html>
 
     #myTable tr.header, #myTable tr:hover, #myTable2 tr.header, #myTable2 tr:hover, #myTable3 tr.header, #myTable3 tr:hover {{
       background-color: #f1f1f1;
+      position: sticky;
+    }}
+    thead,
+    tbody tr {{
+        display: table;
+        width: 100%;
+        }}
+    tbody {{
+        display: block;
+        overflow-y: scroll;
+        overflow-x: none;
+        max-height: 350px;
     }}
     
     h1{{
         text-align: center;
+    }}
+    
+    .row {{
+      margin-left:-5px;
+      margin-right:-5px;
+    }}
+      
+    .column {{
+      float: left;
+      width: 33%;
+      padding: 5px;
+    }}
+    
+    /* Clearfix (clear floats) */
+    .row::after {{
+      content: "";
+      clear: both;
+      display: table;
     }}
     
     </style>
@@ -366,120 +409,129 @@ TEST_ANALYSIS =  """"<!DOCTYPE html>
     <br></br>
     
     <div class="parent">
-    <h3>Tested Vs. not Tested</h3>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for file name.." title="Type in a file name">
-
-    <table id="myTable">
-      <tr class="header">
-        <th>Run number</th>
-        <th>File name</th>
-        <th>Test Percentages</th>
-        <th>Not test Percentages</th>
-
-      </tr>
-      {}
-    </table>
-
-    <script>
-    function myFunction() {{
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {{
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {{
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {{
-            tr[i].style.display = "";
-          }} else {{
-            tr[i].style.display = "none";
+    <div class="row">
+    <div class="column">
+        <h3>Tested Vs. not Tested</h3>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for file name.." title="Type in a file name">
+    
+        <table id="myTable">
+        <thead>
+          <tr class="header">
+            <th>Run number</th>
+            <th>File name</th>
+            <th>Tested Percentages</th>
+            <th>Not tested Percentages</th>
+          </tr>
+        </thead>
+        <tbody>
+          {}
+        </tbody>
+        </table>
+    
+        <script>
+        function myFunction() {{
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {{
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {{
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {{
+                tr[i].style.display = "";
+              }} else {{
+                tr[i].style.display = "none";
+              }}
+            }}
           }}
         }}
-      }}
-    }}
-    </script>
-</div>
-
-<br></br>
-
-<div class="parent">
-    <h3>Tests status</h3>
-    <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for file name.." title="Type in a file name">
-
-    <table id="myTable2">
-      <tr class="header">
-        <th>Run number</th>
-        <th>Class name</th>
-        <th>Passed number</th>
-        <th>Failed number</th>
-
-      </tr>
-      {}
-    </table>
-
-    <script>
-    function myFunction2() {{
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput2");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable2");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {{
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {{
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {{
-            tr[i].style.display = "";
-          }} else {{
-            tr[i].style.display = "none";
+        </script>
+    </div>
+      
+    <div class="column">
+        <h3>Tests status</h3>
+        <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for file name.." title="Type in a file name">
+    
+        <table id="myTable2">
+        <thead>
+          <tr class="header">
+            <th>Run number</th>
+            <th>Class name</th>
+            <th>Passed number</th>
+            <th>Failed number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {}
+        </tbody>
+        </table>
+    
+        <script>
+        function myFunction2() {{
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput2");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable2");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {{
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {{
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {{
+                tr[i].style.display = "";
+              }} else {{
+                tr[i].style.display = "none";
+              }}
+            }}
           }}
         }}
-      }}
-    }}
-    </script>
-</div>
-
-<br></br>
-
-
-<div class="parent">
-    <h3>Tests That changed status</h3>
-    <input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search for file name.." title="Type in a file name">
-
-    <table id="myTable3">
-      <tr class="header">
-        <th>Class name</th>
-        <th>Test name</th>
-        <th>Current run</th>
-        <th>Previous run</th>
-
-      </tr>
-      {}
-    </table>
-
-    <script>
-    function myFunction3() {{
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput3");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable3");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {{
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {{
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {{
-            tr[i].style.display = "";
-          }} else {{
-            tr[i].style.display = "none";
+        </script>
+    </div>
+    
+    <div class="column">
+        <h3>Tests That changed status</h3>
+        <input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search for file name.." title="Type in a file name">
+    
+        <table id="myTable3">
+        <thead>
+          <tr class="header">
+            <th>Class name</th>
+            <th>Test name</th>
+            <th>Current run</th>
+            <th>Previous run</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+          {}
+        </tbody>
+        </table>
+    
+        <script>
+        function myFunction3() {{
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput3");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable3");
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {{
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {{
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {{
+                tr[i].style.display = "";
+              }} else {{
+                tr[i].style.display = "none";
+              }}
+            }}
           }}
         }}
-      }}
-    }}
-    </script>
-</div>
+        </script>
+    </div>
+    </div>
+    </div>
 
 </body>
 </html>"""
