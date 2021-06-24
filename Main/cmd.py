@@ -5,6 +5,17 @@ from Main.Parser.Parser import *
 import argparse
 
 
+def _str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
+
+
 def parse_args():
     """
     this function parses the command line arguments
@@ -14,8 +25,9 @@ def parse_args():
     arg_parser.add_argument('-m', '--module', help='Path to your tested modules', nargs='+', metavar='')
     arg_parser.add_argument('-t', '--tests', help='Path to your tests directory', nargs='+', metavar='')
     arg_parser.add_argument('-o', '--out_dir', help='Path to your output directory', default='results', metavar='')
-    arg_parser.add_argument('-d', '--delete_out', help='True/False, delete unnecessary pytest files from out dir',
-                            default=True, metavar='')
+    arg_parser.add_argument('-d', '--delete_out', help='True/False (yes, t, y, 1, no, f, n, 0 are also applicable), '
+                                                       'Deletes unnecessary pytest files from out dir', default=True,
+                            metavar='')
     arg_parser.add_argument('-e', '--extra_args', help='Extra args to pass pytest (call without --)', nargs='*',
                             default='', metavar='')
     return arg_parser.parse_args()
@@ -72,7 +84,7 @@ def main():
     parser = Parser(db, args.out_dir)
     html = HTML(path.join(args.out_dir, "html"), db)
 
-    if args.delete_out:
+    if _str2bool(args.delete_out):
         os.system("rm -r -f %(Covxml)s %(Testsxml)s %(cov_annotate)s .pytest_cache" % {
             "Covxml": path.join(args.out_dir, "coverage.xml"),
             "Testsxml": path.join(args.out_dir, "tests.xml"),
