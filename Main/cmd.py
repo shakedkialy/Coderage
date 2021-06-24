@@ -85,11 +85,10 @@ def main():
     html = HTML(path.join(args.out_dir, "html"), db)
 
     if _str2bool(args.delete_out):
-        os.system("rm -r -f %(Covxml)s %(Testsxml)s %(cov_annotate)s .pytest_cache" % {
-            "Covxml": path.join(args.out_dir, "coverage.xml"),
-            "Testsxml": path.join(args.out_dir, "tests.xml"),
-            "cov_annotate": path.join(args.out_dir, "annotate")
-        })
+        os.remove(path.join(args.out_dir, "coverage.xml"))
+        os.remove(path.join(args.out_dir, "tests.xml"))
+        shutil.rmtree(path.join(args.out_dir, "annotate"))
+
     abs_path = args.out_dir + "/html/main_index.html"
     print("To watch the results copy this path to your internet browser: \n" +
           os.path.abspath(abs_path))
