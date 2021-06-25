@@ -96,7 +96,7 @@ class Parser:
         function_details_rows = []
         file_name = os.path.basename(file_path)
         file_name = file_name[:file_name.index(',')]
-        file_name = file_name.replace('_', '/')
+        file_name = file_name.replace('_', '.')
         with open(file_path, 'r') as file:
             functions = re.split('(\s)+def', file.read())
             for function in functions[1:]:
