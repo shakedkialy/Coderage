@@ -99,7 +99,7 @@ MAIN_HTML_MSG = """<!DOCTYPE html>
         </html>
         """
 
-COVERAGE_HTML_ANALYSIS = """"<!DOCTYPE html>
+COVERAGE_HTML_ANALYSIS = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -308,7 +308,7 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
 </body>
 </html>"""
 
-TEST_ANALYSIS =  """"<!DOCTYPE html>
+TEST_ANALYSIS =  """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
