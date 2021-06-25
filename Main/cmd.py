@@ -4,8 +4,6 @@ from Main.HTML.HTML import *
 from Main.Parser.Parser import *
 import argparse
 
-from Main.Parser.TemplateCreator import *
-
 
 def _str2bool(v):
     if isinstance(v, bool):
@@ -30,13 +28,8 @@ def parse_args():
     arg_parser.add_argument('-d', '--delete_out', help='True/False (yes, t, y, 1, no, f, n, 0 are also applicable), '
                                                        'Deletes unnecessary pytest files from out dir', default=True,
                             metavar='')
-    arg_parser.add_argument('-ct', '--create_template',
-                            help='True/False (yes, t, y, 1, no, f, n, 0 are also applicable), '
-                                 'Creates template files to help build tests for all untested functions', default=False,
-                            metavar='')
     arg_parser.add_argument('-e', '--extra_args', help='Extra args to pass pytest (call without --)', nargs='*',
                             default='', metavar='')
-
     return arg_parser.parse_args()
 
 
@@ -90,9 +83,6 @@ def main():
 
     parser = Parser(db, args.out_dir)
     html = HTML(path.join(args.out_dir, "html"), db)
-
-    if args.create_template:
-        create_templates(db, args.out_dir)
 
     if _str2bool(args.delete_out):
         os.remove(path.join(args.out_dir, "coverage.xml"))
