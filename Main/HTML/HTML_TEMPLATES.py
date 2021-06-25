@@ -3,7 +3,7 @@ MAIN_HTML_MSG = """<!DOCTYPE html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <title>Coderage</title>
-            <link rel="icon" sizes="15x15" href="logo.png">
+            <link rel="icon" sizes="15x15" href="favicon.png">
             <link rel="stylesheet" href="main_style.css" type="text/css">
             <link rel="stylesheet" href="highchart.css" type="text/css">
 
@@ -105,7 +105,7 @@ COVERAGE_HTML_ANALYSIS = """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coverage Analysis By File</title>
-    <link rel="icon" sizes="15x15" href="logo.png">
+    <link rel="icon" sizes="15x15" href="favicon.png">
     <style>
     * {{
       box-sizing: border-box;
@@ -227,7 +227,7 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
      <link rel="stylesheet" href="detailedLastRun.css" type="text/css">
       <link rel="stylesheet" href="main_style.css" type="text/css">
      <link rel="stylesheet" href="highchart2.css" type="text/css">
-     <link rel="icon" sizes="15x15" href="logo.png">
+     <link rel="icon" sizes="15x15" href="favicon.png">
     <title>Detailed Last Run</title>
     <style>h1.detailed{{
         text-align: center;
@@ -316,7 +316,7 @@ TEST_ANALYSIS =  """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tests Analysis By File</title>
-    <link rel="icon" sizes="15x15" href="logo.png">
+    <link rel="icon" sizes="15x15" href="favicon.png">
     <style>
     * {{
       box-sizing: border-box;
