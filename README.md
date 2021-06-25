@@ -58,6 +58,7 @@ After this command line script is complete, you should see the following message
 ## Results
 * The Coderage results located under ```Results``` folder in your project directory. Results folder created after at least one run.
   * ```Results\html``` contains HTML files where you can find graphs and analysis of your last run. 
+  * ```Results\tests_templates``` contains the test files templates, if asked to create them.
   * ```Results\coverage```
   * ```Results\annotate```
   \
