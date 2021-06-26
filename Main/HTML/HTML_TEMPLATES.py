@@ -276,10 +276,23 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
      <link rel="stylesheet" href="highchart2.css" type="text/css">
      <link rel="icon" sizes="15x15" href="favicon.png">
     <title>Detailed Last Run</title>
-    <style>h1.detailed{{
+    <style>
+    h1.detailed{{
         text-align: center;
         display: block;
-    }}</style>
+    }}
+    
+    #myTable {{
+      width: 100%;
+      border-collapse:separate; 
+      border-spacing:5em;
+    }}
+    
+    #myTable tr{{
+      padding-bottom: 1em;
+    }}
+    
+    </style>
     
 </head>
 <div id="header">
@@ -297,11 +310,20 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         
+              
+      
+       
+        <table id="myTable">
+        <tr>
+        <td colspan="2">
         <figure class="highcharts-figure">
           <div id="container"></div>
         </figure>
-        
-       
+        </td>
+        </tr>
+                
+        <tr>
+        <td>
         <div class="new">
         <span>Functions not tested:</span>
         <table id="index">
@@ -316,7 +338,29 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
                 </tbody>
             </table>
         </div>
+        </td>
         
+        <td>
+        <div class="test">
+        <span>Tests that consistently fail:</span>
+                    <table id="index">
+                <thead>
+                    <tr class="tablehead">
+                        <th class="shortkey_s">Class name</th>
+                        <th class="shortkey_s">Test name</th>
+                        <th class="shortkey_s">Times failed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {}
+                </tbody>
+            </table>
+        </div>
+        </td>
+        </tr>
+        
+        <tr>
+        <td>
         <div class="not">
         <span>Functions that changed status from previous run:</span>
                 <table id="index">
@@ -333,8 +377,9 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
                 </tbody>
             </table>        
         </div>
+        </td>
         
-        
+        <td>
         <div class="test">
         <span>Tests that changed status from previous run:</span>
                     <table id="index">
@@ -351,6 +396,10 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
                 </tbody>
             </table>
         </div>
+        </td>
+        </tr>
+        
+        </table>
     </div>
     <script type="text/javascript" src="highchart2.js"></script>
     <br></br>
