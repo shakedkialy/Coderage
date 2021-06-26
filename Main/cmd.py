@@ -1,9 +1,7 @@
-from os import path
 from Main.DB.DatabaseHandler import *
 from Main.HTML.HTML import *
 from Main.Parser.Parser import *
 import argparse
-
 from Main.Parser.TemplateCreator import *
 
 
@@ -24,8 +22,8 @@ def parse_args():
     :return: arguments necessary to run the program
     """
     arg_parser = argparse.ArgumentParser(description="Usage: Coderage -m <Modules to test> -t <Test directory>")
-    arg_parser.add_argument('-m', '--module', help='Path to your tested modules', nargs='+', metavar='')
-    arg_parser.add_argument('-t', '--tests', help='Path to your tests directory', nargs='+', metavar='')
+    arg_parser.add_argument('-m', '--module', help='Path to your tested modules', nargs='+', metavar='', required=True)
+    arg_parser.add_argument('-t', '--tests', help='Path to your tests directory', nargs='+', metavar='', required=True)
     arg_parser.add_argument('-o', '--out_dir', help='Path to your output directory', default='results', metavar='')
     arg_parser.add_argument('-d', '--delete_out', help='True/False (yes, t, y, 1, no, f, n, 0 are also applicable), '
                                                        'Deletes unnecessary pytest files from out dir', default=True,
@@ -34,7 +32,7 @@ def parse_args():
                             help='True/False (yes, t, y, 1, no, f, n, 0 are also applicable), '
                                  'Creates template files to help build tests for all untested functions', default=False,
                             metavar='')
-    arg_parser.add_argument('-e', '--extra_args', help='Extra args to pass pytest (call without --)', nargs='*',
+    arg_parser.add_argument('-e', '--extra_args', help='Extra args to pass pytest', nargs=argparse.REMAINDER,
                             default='', metavar='')
 
     return arg_parser.parse_args()
@@ -42,6 +40,7 @@ def parse_args():
 
 def main():
     args = parse_args()
+
     if not os.path.exists(args.out_dir):
         if not args.delete_out:
             os.system("mkdir %(out_dir)s" % {"out_dir": args.out_dir})
@@ -61,7 +60,7 @@ def main():
     # Adding -- before each extra argument
     extra_args = ""
     for extra_arg in args.extra_args:
-        extra_args += ("--%(extra_arg)s " % {"extra_arg": extra_arg})
+        extra_args += ("%(extra_arg)s " % {"extra_arg": extra_arg})
 
     # Convert list of tests directories to tests string
     tests = ""
@@ -86,6 +85,7 @@ def main():
 
     exit_code = os.system(pytest_cmd)
     if exit_code != 0 and exit_code != 1:
+        print("Error: pytest ended with exit code: " + str(exit_code))
         exit()
 
     parser = Parser(db, args.out_dir)
