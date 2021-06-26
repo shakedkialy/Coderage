@@ -35,7 +35,7 @@ After this command line script is complete, you should see the following message
 `Coderage -m <modules> -t <tests>`  
 `Coderage -h` will display this:
   ```
-  usage: Coderage [-h] [-m  [...]] [-t  [...]] [-o] [-d] [-e [[...]]]
+  usage: Coderage [-h] [-m  [...]] [-t  [...]] [-o] [-d] [-ct] [-e [[...]]]
   
   Usage: Coderage -m <Modules to test> -t <Test directory>
   
@@ -48,6 +48,9 @@ After this command line script is complete, you should see the following message
     -o , --out_dir        Path to your output directory
     -d , --delete_out     True/False, delete unnecessary pytest files from out
                           dir
+    -ct , --create_template
+                        True/False (yes, t, y, 1, no, f, n, 0 are also applicable), Creates template files to help
+                        build tests for all untested functions
     -e [ [ ...]], --extra_args [ [ ...]]
                           Extra args to pass pytest (call without --)
   ```
@@ -55,6 +58,7 @@ After this command line script is complete, you should see the following message
 ## Results
 * The Coderage results located under ```Results``` folder in your project directory. Results folder created after at least one run.
   * ```Results\html``` contains HTML files where you can find graphs and analysis of your last run. 
+  * ```Results\tests_templates``` contains the test files templates, if asked to create them.
   * ```Results\coverage```
   * ```Results\annotate```
   \
