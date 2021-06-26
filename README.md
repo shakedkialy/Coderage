@@ -1,5 +1,5 @@
 # OpenSourceWorkshop - Coderage
-<img src="https://github.com/shakedkialy/Coderage/blob/main/html_files/logo.png?raw=true" width="250">
+<img src="https://github.com/shakedkialy/Coderage/blob/main/Main/HTML/html_files/logo.png?raw=true" width="550">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
