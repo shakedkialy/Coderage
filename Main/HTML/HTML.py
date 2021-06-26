@@ -80,7 +80,7 @@ class HTML:
         changed_tests_data = self.db.get_last_changed_tests()
         changed_tests_table = self.create_table_rows(changed_tests_data)
 
-        consistent_fails = self.db.get_last_changed_tests()
+        consistent_fails = self.db.get_consistent_fails_tests()
         consistent_fails_table = self.create_table_rows(consistent_fails)
 
         with open(os.path.join(self.output_path, "detailedLastRun.html"), 'w') as f:

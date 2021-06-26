@@ -342,13 +342,12 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
         
         <td>
         <div class="test">
-        <span>Tests that consistently fail:</span>
+        <span>Tests that consistently fail (5 times in a row or More):</span>
                     <table id="index">
                 <thead>
                     <tr class="tablehead">
                         <th class="shortkey_s">Class name</th>
                         <th class="shortkey_s">Test name</th>
-                        <th class="shortkey_s">Times failed</th>
                     </tr>
                 </thead>
                 <tbody>

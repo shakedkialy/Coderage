@@ -215,6 +215,9 @@ class DatabaseHandler:
     def get_last_changed_tests(self):
         return self.__execute_query(SQLQueries.LAST_CHANGED_TESTS_LIST)
 
+    def get_consistent_fails_tests(self):
+        return self.__execute_query(SQLQueries.CONSISTENT_FAILS_TESTS_LIST)
+
     """
     ----- Html - Coverage Analysis By File page ----
     """
