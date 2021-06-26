@@ -99,7 +99,7 @@ Highcharts.chart('container2', {{
   }},
 
   series: [{{
-    name: '%',
+    name: 'Run Number',
     data: {}
   }}],
 
@@ -117,8 +117,65 @@ Highcharts.chart('container2', {{
       }}
     }}]
   }}
-}}
-);"""
+}});
+
+Highcharts.chart('container3', {{
+  chart: {{
+    renderTo: 'container3' }},
+
+  title: {{
+    text: 'Tests Runtime History'
+  }},
+
+
+  yAxis: {{
+    title: {{
+      text: 'seconds'
+    }}
+  }},
+
+  xAxis: {{
+    accessibility: {{
+      rangeDescription: 'Run Number'
+    }}
+  }},
+
+  legend: {{
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'middle'
+  }},
+
+  plotOptions: {{
+    series: {{
+      label: {{
+        connectorAllowed: false
+      }},
+      pointStart: {}
+    }}
+  }},
+
+  series: [{{
+    name: 'Runtime',
+    data: {}
+  }}],
+
+  responsive: {{
+    rules: [{{
+      condition: {{
+        maxWidth: 500
+      }},
+      chartOptions: {{
+        legend: {{
+          layout: 'horizontal',
+          align: 'center',
+          verticalAlign: 'bottom'
+        }}
+      }}
+    }}]
+  }}
+}});
+"""
 
 
 HIGHCHARTS2_MSG = """Highcharts.chart('container', {{

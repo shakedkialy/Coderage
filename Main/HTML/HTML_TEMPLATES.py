@@ -87,6 +87,10 @@ MAIN_HTML_MSG = """<!DOCTYPE html>
         <figure class="highcharts-figure">
           <div id="container"></div>
         </figure>
+        
+        <figure class="highcharts-figure">
+          <div id="container3"></div>
+        </figure>
 
         <figure class="highcharts-figure">
           <div id="container2"></div>

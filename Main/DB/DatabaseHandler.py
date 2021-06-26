@@ -173,6 +173,19 @@ class DatabaseHandler:
 
         return first_run_id, results
 
+    def get_main_run_time_history(self):
+
+        query = self.__execute_query(SQLQueries.MAIN_RUNTIME_HISTORY.format(DatabaseHandler.RESULTS_LIMIT))
+
+        first_run_id = query[len(query) - 1][0]
+        results = []
+        for row in query:
+            results.append(float(row[1]))
+
+        results.reverse()
+
+        return first_run_id, results
+
     """
     ----- Html - Last run analysis page ----
     """

@@ -41,19 +41,19 @@ class HTML:
             rows_html += row_html
         return rows_html
 
-
     def generating_main_html(self):
         main_table = self.db.get_main_table()
         with open(os.path.join(self.output_path, "main_index.html"), 'w') as f:
             message = MAIN_HTML_MSG.format(main_table=main_table)
             f.write(message)
 
-
     def generating_highCharts_js(self):
         test_start, passed, failed, skipped = self.db.get_main_test_history()
         cov_start, cover = self.db.get_main_coverage_history()
+        runtime_start, runtime = self.db.get_main_run_time_history()
+
         with open(os.path.join(self.output_path, "highchart.js"), 'w') as f:
-            message = HIGHCHARTS_MSG.format(test_start, passed, failed, skipped, cov_start, cover)
+            message = HIGHCHARTS_MSG.format(test_start, passed, failed, skipped, cov_start, cover, runtime_start, runtime)
             f.write(message)
 
     def generating_highcharts2_js(self):
