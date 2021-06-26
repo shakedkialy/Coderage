@@ -90,6 +90,11 @@ MAIN_COVERAGE_HISTORY = """SELECT cs.run_id, cs.line_rate*100 as percent
                                 order by run_id desc
                                 limit {}"""
 
+MAIN_RUNTIME_HISTORY = """SELECT rs.run_id, rs.run_time
+                            FROM run_summary rs
+                            order by run_id desc
+                            limit {}"""
+
 """
 ----- Html - Last run analysis page ----
 """
