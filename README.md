@@ -16,7 +16,7 @@ The purpose of this project is to enable easy and efficient analyzing and conclu
 * If you clone our files in git, the folder DemoProject contains examples files for running (module1, module2 folders contain 2 code modules for example. Tests contains pytest tests for these modules). \
 enter code_examples directory ```cd DemoProject```
 and run this command: \
-```Coderage -m . -t Tests```
+```Coderage test -m . -t Tests```
 \
 This command runs coverage on the whole directory and runs the tests in the Tests_Examples folder.
 
@@ -32,8 +32,25 @@ After this command line script is complete, you should see the following message
 1. Name your test files _test_filename_ or _filename_test_ (for pytest to recognize them as test files)
 
 * In order to run Coderage you can use the following command: \
-`Coderage -m <modules> -t <tests>`  
+`Coderage test -m <modules> -t <tests>`  
+or `Coderage merge -f <first database> -s <second database> -o <output path>`
+  
 `Coderage -h` will display this:
+  ```
+  usage: Coderage [-h] {test,merge} ...
+
+Usage: Coderage -m <Modules to test> -t <Test directory>
+
+positional arguments:
+  {test,merge}  help for subcommand
+    test        arguments to test your program
+    merge       arguments to merge two databases
+
+optional arguments:
+  -h, --help    show this help message and exit
+  ```
+
+`Coderage test -h` will display this:
   ```
   usage: Coderage [-h] [-m  [...]] [-t  [...]] [-o] [-d] [-ct] [-e [[...]]]
   
@@ -49,10 +66,21 @@ After this command line script is complete, you should see the following message
     -d , --delete_out     True/False, delete unnecessary pytest files from out
                           dir
     -ct , --create_template
-                        True/False (yes, t, y, 1, no, f, n, 0 are also applicable), Creates template files to help
+                        True/False, Creates template files to help
                         build tests for all untested functions
     -e [ [ ...]], --extra_args [ [ ...]]
-                          Extra args to pass pytest (call without --)
+                          Extra args to pass pytest
+  ```
+
+and `Coderage merge -h` will display this:
+  ```
+  usage: Coderage merge [-h] -f  -s  -o
+
+optional arguments:
+  -h, --help       show this help message and exit
+  -f , --first     Path to the first database
+  -s , --second    Path to the second database
+  -o , --out_dir   Path to your output directory
   ```
 
 ## Results

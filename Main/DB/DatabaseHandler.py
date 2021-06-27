@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from sqlite3 import Error
 from Main.DB import SQLQueries
@@ -66,14 +67,18 @@ class DatabaseHandler:
             return 0
         return rows[0][0]
 
-    def __init__(self, project_path, code_path, test_path):
+    def __init__(self, project_path, code_path="", test_path=""):
         """
         inits a DB object.
         :param project_path: the directory the project runs in
         :param code_path: the directory of the code
         :param test_path: the directory of the tests
         """
-        self.projectPath = project_path + "/coderage.db"
+        if project_path.endswith(".db"):
+            self.projectPath = project_path
+        else:
+            self.projectPath = os.path.join(project_path, "coderage.db")
+
         self.connection = None
         self.code_path = code_path
         self.test_path = test_path
@@ -234,3 +239,13 @@ class DatabaseHandler:
 
     def get_file_tests_did_pass(self):
         return self.__execute_query(SQLQueries.TESTS_FILE_DID_PASS)
+
+    """
+    ----- Merge - helper functions to merge databases ----
+    """
+
+    def get_all_runids(self):
+        return self.__execute_query(SQLQueries.GET_ALL_RUNIDS)
+
+    def get_all_data(self, table_name):
+        return self.__execute_query(SQLQueries.GET_ALL_DATA.format(table_name))
