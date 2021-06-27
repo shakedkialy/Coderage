@@ -282,16 +282,31 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
         display: block;
     }}
     
-    #myTable {{
+    #myTable{{
       width: 100%;
       border-collapse:separate; 
       border-spacing:5em;
     }}
-    
+        
     #myTable tr{{
       padding-bottom: 1em;
     }}
     
+    #myTable #index td{{
+       width: 100%;
+       text-align:left
+    }}
+    
+    #index{{
+       width: 90%;
+    }}
+    
+    caption {{
+    margin-bottom: 5px;
+    font-size: 100%;
+    padding: 5px;
+    font-weight: bold;
+    }}
     </style>
     
 </head>
@@ -325,8 +340,8 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
         <tr>
         <td>
         <div class="new">
-        <span>Functions not tested:</span>
         <table id="index">
+        <caption>Functions not tested:</caption>
                 <thead>
                     <tr class="tablehead">
                         <th class="shortkey_s">File name</th>
@@ -342,9 +357,9 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
         
         <td>
         <div class="test">
-        <span>Tests that consistently fail (5 times in a row or More):</span>
-                    <table id="index">
-                <thead>
+                <table id="index">
+                <caption>Tests that consistently fail (5 times in a row or More):</caption>
+                <thead style="display:table-header-group">
                     <tr class="tablehead">
                         <th class="shortkey_s">Class name</th>
                         <th class="shortkey_s">Test name</th>
@@ -361,9 +376,9 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
         <tr>
         <td>
         <div class="not">
-        <span>Functions that changed status from previous run:</span>
-                <table id="index">
-                <thead>
+            <table id="index">
+            <caption>Functions that changed status from previous run:</caption>
+                <thead style="display:table-header-group">
                     <tr class="tablehead">
                         <th class="shortkey_s">File name</th>
                         <th class="shortkey_s">Function name</th>
@@ -380,9 +395,9 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
         
         <td>
         <div class="test">
-        <span>Tests that changed status from previous run:</span>
-                    <table id="index">
-                <thead>
+            <table id="index">
+            <caption>Tests that changed status from previous run: </caption>
+                <thead style="display:table-header-group">
                     <tr class="tablehead">
                         <th class="shortkey_s">Class name</th>
                         <th class="shortkey_s">Test name</th>
