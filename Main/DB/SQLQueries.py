@@ -194,3 +194,15 @@ TESTS_FILE_DID_PASS = """SELECT td.class_name, td.test_Name,
                                             from tests_details)
                               and (td2.did_pass is NULL or td2.did_pass != td.did_pass)
                         order by td.class_name, td.test_Name, prev_run"""
+
+"""
+----- Merge - helper functions to merge databases ----
+"""
+
+GET_ALL_RUNIDS = """SELECT run_id, timestemp 
+                    FROM run_summary
+                    ORDER BY timestemp ASC"""
+
+GET_ALL_DATA = """SELECT *
+                    FROM {}
+                    ORDER BY run_id ASC"""

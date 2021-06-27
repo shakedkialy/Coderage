@@ -1,8 +1,10 @@
-from Main.DB.DatabaseHandler import *
+from sys import stderr
+
 from Main.HTML.HTML import *
 from Main.Parser.Parser import *
 import argparse
 from Main.Parser.TemplateCreator import *
+from Main.DB.DatabaseMerger import *
 
 
 def _str2bool(v):
@@ -21,26 +23,37 @@ def parse_args():
     this function parses the command line arguments
     :return: arguments necessary to run the program
     """
-    arg_parser = argparse.ArgumentParser(description="Usage: Coderage -m <Modules to test> -t <Test directory>")
-    arg_parser.add_argument('-m', '--module', help='Path to your tested modules', nargs='+', metavar='', required=True)
-    arg_parser.add_argument('-t', '--tests', help='Path to your tests directory', nargs='+', metavar='', required=True)
-    arg_parser.add_argument('-o', '--out_dir', help='Path to your output directory', default='results', metavar='')
-    arg_parser.add_argument('-d', '--delete_out', help='True/False (yes, t, y, 1, no, f, n, 0 are also applicable), '
+    arg_parser = argparse.ArgumentParser(prog="Coderage", description="Usage: Coderage -m <Modules to test> -t <Test directory>")
+    subparsers = arg_parser.add_subparsers(help='help for subcommand', dest='command')
+
+    test_group = subparsers.add_parser('test', help='arguments to test your program')
+    merge_group = subparsers.add_parser('merge', help='arguments to merge two databases')
+
+    test_group.add_argument('-m', '--module', help='Path to your tested modules', nargs='+', metavar='', required=True)
+    test_group.add_argument('-t', '--tests', help='Path to your tests directory', nargs='+', metavar='', required=True)
+    test_group.add_argument('-o', '--out_dir', help='Path to your output directory', default='results', metavar='')
+    test_group.add_argument('-d', '--delete_out', help='True/False (yes, t, y, 1, no, f, n, 0 are also applicable), '
                                                        'Deletes unnecessary pytest files from out dir', default=True,
                             metavar='')
-    arg_parser.add_argument('-ct', '--create_template',
+    test_group.add_argument('-ct', '--create_template',
                             help='True/False (yes, t, y, 1, no, f, n, 0 are also applicable), '
                                  'Creates template files to help build tests for all untested functions', default=False,
                             metavar='')
-    arg_parser.add_argument('-e', '--extra_args', help='Extra args to pass pytest', nargs=argparse.REMAINDER,
+    test_group.add_argument('-e', '--extra_args', help='Extra args to pass pytest', nargs=argparse.REMAINDER,
                             default='', metavar='')
+
+    merge_group.add_argument('-f', '--first', help='Path to the first database', metavar='', required=True)
+    merge_group.add_argument('-s', '--second', help='Path to the second database', metavar='', required=True)
+    merge_group.add_argument('-o', '--out_dir', help='Path to your output directory', default='results', metavar='', required=True)
 
     return arg_parser.parse_args()
 
 
-def main():
-    args = parse_args()
-
+def test_mode(args):
+    """
+    This function manages the test mode of the program - runs the tests and creates the HTML reports, with the
+    given arguments from the user.
+    """
     if not os.path.exists(args.out_dir):
         if not args.delete_out:
             os.system("mkdir %(out_dir)s" % {"out_dir": args.out_dir})
@@ -102,6 +115,44 @@ def main():
     abs_path = args.out_dir + "/html/main_index.html"
     print("To watch the results copy this path to your internet browser: \n" +
           os.path.abspath(abs_path))
+
+
+def update_db_name(db_path, results_path, idx):
+    """
+    This function checks if the file in the db_path exists, and changes the db name in case it in the
+    results_path, to make sure the databases names won't collide.
+    """
+    if not os.path.exists(db_path) or not db_path.endswith("coderage.db"):
+        stderr.write("The given paths are not valid coderage database paths")
+        exit()
+
+    db_dir = os.path.dirname(db_path)
+    updated_db_path = db_path
+    if db_dir == results_path:
+        updated_db_path = os.path.join(db_dir, "coderage" + str(idx) + ".db")
+        os.rename(db_path, updated_db_path)
+    return updated_db_path
+
+
+def merge_mode(args):
+    """
+    This function manages the merge mode of the program - merges the data in two databases into one, with the
+    given arguments from the user.
+    """
+    DatabaseMerger.merge_databases(update_db_name(args.first, args.out_dir, 1),
+                                   update_db_name(args.second, args.out_dir, 2),
+                                   args.out_dir)
+
+    print("A new database was created: " + os.path.join(args.out_dir, "coderage.db"))
+
+
+def main():
+    args = parse_args()
+
+    if args.command == 'test':
+        test_mode(args)
+    else:
+        merge_mode(args)
 
 
 if __name__ == '__main__':
