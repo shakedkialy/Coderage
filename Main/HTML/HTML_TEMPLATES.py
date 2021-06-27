@@ -294,11 +294,19 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
     
     #myTable #index td{{
        width: 100%;
-       text-align:left
+       text-align:left;
     }}
     
     #index{{
        width: 90%;
+    }}
+    
+    #index th{{
+       width: 100%;
+       text-align:left;
+       background-color:rgb(124, 181, 236);
+       color:white;
+       font-weight: bold;
     }}
     
     caption {{
