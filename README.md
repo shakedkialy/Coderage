@@ -63,7 +63,7 @@ optional arguments:
     -t  [ ...], --tests  [ ...]
                           Path to your tests directory
     -o , --out_dir        Path to your output directory
-    -d , --delete_out     True/False, delete unnecessary pytest files from out
+    -d , --delete_out     True/False (yes, t, y, 1, no, f, n, 0 are also applicable), delete unnecessary pytest files from out
                           dir
     -ct , --create_template
                         True/False (yes, t, y, 1, no, f, n, 0 are also applicable), Creates template files to help
