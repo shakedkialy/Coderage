@@ -80,11 +80,8 @@ class HTML:
         changed_tests_data = self.db.get_last_changed_tests()
         changed_tests_table = self.create_table_rows(changed_tests_data)
 
-        consistent_fails = self.db.get_consistent_fails_tests()
-        consistent_fails_table = self.create_table_rows(consistent_fails)
-
         with open(os.path.join(self.output_path, "detailedLastRun.html"), 'w') as f:
-            message = DETAILED_LAST_RUN.format(untested_table, consistent_fails_table, changed_functions_table, changed_tests_table)
+            message = DETAILED_LAST_RUN.format(untested_table, changed_functions_table, changed_tests_table)
             f.write(message)
 
     def generating_test_analysis_html(self):

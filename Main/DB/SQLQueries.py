@@ -140,15 +140,6 @@ LAST_CHANGED_TESTS_LIST = """SELECT td.class_name, td.test_Name,
                                 and (td2.did_pass is NULL or td2.did_pass != td.did_pass)
                             order by td.class_name, td.test_Name, prev_run"""  # Tests that changed status from earlier - test, now, before
 
-CONSISTENT_FAILS_TESTS_LIST = """select td2.class_name, td2.test_Name from(
-                                    SELECT td.class_name, td.test_Name, COUNT(CASE WHEN td.did_pass = 0 then 1 END) as "Times_failed"
-                                    FROM tests_details td
-                                    where td.run_id + 5 > (select max(run_id) from tests_details) 
-                                    GROUP by td.class_name, td.test_Name
-                                    ) td2
-                                WHERE Times_failed >= 5
-                                order by td2.class_name, td2.test_Name""" # Tests that failed more than 5 times in a row
-
 """
 ----- Html - Coverage Analysis By File page ----
 """
@@ -194,3 +185,15 @@ TESTS_FILE_DID_PASS = """SELECT td.class_name, td.test_Name,
                                             from tests_details)
                               and (td2.did_pass is NULL or td2.did_pass != td.did_pass)
                         order by td.class_name, td.test_Name, prev_run"""
+
+"""
+----- Merge - helper functions to merge databases ----
+"""
+
+GET_ALL_RUNIDS = """SELECT run_id, timestemp 
+                    FROM run_summary
+                    ORDER BY timestemp ASC"""
+
+GET_ALL_DATA = """SELECT *
+                    FROM {}
+                    ORDER BY run_id ASC"""

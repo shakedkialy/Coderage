@@ -276,46 +276,10 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
      <link rel="stylesheet" href="highchart2.css" type="text/css">
      <link rel="icon" sizes="15x15" href="favicon.png">
     <title>Detailed Last Run</title>
-    <style>
-    h1.detailed{{
+    <style>h1.detailed{{
         text-align: center;
         display: block;
-    }}
-    
-    #myTable{{
-      width: 100%;
-      border-collapse:separate; 
-      border-spacing:5em;
-    }}
-        
-    #myTable tr{{
-      padding-bottom: 1em;
-    }}
-    
-    #myTable #index td{{
-       width: 100%;
-       text-align:left;
-    }}
-    
-    #index{{
-       width: 90%;
-    }}
-    
-    #index th{{
-       width: 100%;
-       text-align:left;
-       background-color:rgb(124, 181, 236);
-       color:white;
-       font-weight: bold;
-    }}
-    
-    caption {{
-    margin-bottom: 5px;
-    font-size: 100%;
-    padding: 5px;
-    font-weight: bold;
-    }}
-    </style>
+    }}</style>
     
 </head>
 <div id="header">
@@ -333,23 +297,14 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script>
         
-              
-      
-       
-        <table id="myTable">
-        <tr>
-        <td colspan="2">
         <figure class="highcharts-figure">
           <div id="container"></div>
         </figure>
-        </td>
-        </tr>
-                
-        <tr>
-        <td>
+        
+       
         <div class="new">
+        <span>Functions not tested:</span>
         <table id="index">
-        <caption>Functions not tested:</caption>
                 <thead>
                     <tr class="tablehead">
                         <th class="shortkey_s">File name</th>
@@ -361,32 +316,11 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
                 </tbody>
             </table>
         </div>
-        </td>
         
-        <td>
-        <div class="test">
-                <table id="index">
-                <caption>Tests that consistently fail (5 times in a row or More):</caption>
-                <thead style="display:table-header-group">
-                    <tr class="tablehead">
-                        <th class="shortkey_s">Class name</th>
-                        <th class="shortkey_s">Test name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {}
-                </tbody>
-            </table>
-        </div>
-        </td>
-        </tr>
-        
-        <tr>
-        <td>
         <div class="not">
-            <table id="index">
-            <caption>Functions that changed status from previous run:</caption>
-                <thead style="display:table-header-group">
+        <span>Functions that changed status from previous run:</span>
+                <table id="index">
+                <thead>
                     <tr class="tablehead">
                         <th class="shortkey_s">File name</th>
                         <th class="shortkey_s">Function name</th>
@@ -399,13 +333,12 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
                 </tbody>
             </table>        
         </div>
-        </td>
         
-        <td>
+        
         <div class="test">
-            <table id="index">
-            <caption>Tests that changed status from previous run: </caption>
-                <thead style="display:table-header-group">
+        <span>Tests that changed status from previous run:</span>
+                    <table id="index">
+                <thead>
                     <tr class="tablehead">
                         <th class="shortkey_s">Class name</th>
                         <th class="shortkey_s">Test name</th>
@@ -418,10 +351,6 @@ DETAILED_LAST_RUN = """<!DOCTYPE html>
                 </tbody>
             </table>
         </div>
-        </td>
-        </tr>
-        
-        </table>
     </div>
     <script type="text/javascript" src="highchart2.js"></script>
     <br></br>
