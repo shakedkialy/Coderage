@@ -110,9 +110,9 @@ MAIN_HTML_MSG = """<!DOCTYPE html>
             <td style="font-size: 13px;">
                 HTML coverage report which coverage generates</td>
             <td style="font-size: 13px;">
-                Coverage percentage by file</td>
+                Coverage percentage by file over time</td>
             <td style="font-size: 13px;">
-                Test statuses and percentage by file</td>
+                Test statuses and percentage by file over time</td>
           </tr>
         </table>
         <br></br>
